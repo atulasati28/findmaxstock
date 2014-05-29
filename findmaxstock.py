@@ -65,6 +65,7 @@ class CSVStock():
     """  
     print results as an end user readable format
     """
+    self.get_max_stock()
     if self.results:
       print "*"*50
       print "%s %s %s %s " %("COMPANY".ljust(20), "PRICE".ljust(10), "YEAR".ljust(10), "MONTH".ljust(10))
@@ -91,7 +92,6 @@ if __name__ == '__main__':
       try:
         csv_stock = CSVStock(csv_file)
         csv_stock.set_max_stock()
-        csv_stock.get_max_stock()
         csv_stock.print_stocks()
         csv_stock.close_file()
       except Exception:
