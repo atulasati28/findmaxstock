@@ -48,6 +48,12 @@ class CSVStock():
         return False
     return True
 
+  def get_max_stock(self):
+    """  
+    get a result list of dict of all max stocks for multiple companies, taht has been set using set_max_stock 
+    """
+    return self.results
+
   def close_file(self):
     """  
     close open csv file
