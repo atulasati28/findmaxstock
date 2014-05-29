@@ -3,29 +3,58 @@ import sys
 import unittest
 
 from findmaxstock import CSVStock
-
 class TestCSVStock(unittest.TestCase):
+  """  
+  CSVStock unit test cases.....
+  """
   def setUp(self):
+    """  
+    this will load csv valid and invalid
+    """
     self.rightfile = 'rightfile.csv'
     self.wrongfile = 'wrongfile.csv'
 
   def tearDown(self):
+    """  
+    no need to reset or do anything here as its input as a file that we didnt change in it during test...
+    """
     try:
       pass
     except:
       pass
 
   def test_success(self):
-    """ positive test case """
+    """  
+    positive test : just test if there is no exception is raised and when set max stock it return True
+    """
     x = CSVStock(self.rightfile)    
-    self.assertTrue(x.find_max())
+    self.assertTrue(x.set_max_stock())
 
-  def test_invalid_csvdata(self): 
-    """ negative test case """
+  def test_compare_exact_value(self):
+    """  
+    positive test : just test if there is no exception is raised and when set max stock it return True
+    and compare results : match expacted values for 'company A' 
+    """
+    x = CSVStock(self.rightfile)    
+    x.set_max_stock()
+    data = x.get_max_stock()
+
+    self.assertEqual(data['Company A'][0][0],'799','This is not write csv...')
+    self.assertEqual(data['Company A'][0][1],'1996','This is not write csv...')
+    self.assertEqual(data['Company A'][0][2],'Apr','This is not write csv...')
+    
+
+  def test_invalid_data(self): 
+    """  
+    negative test : just test if is raised with invalid csv of not valid format csv
+    """
     x = CSVStock(self.wrongfile)  
-    self.assertFalse(x.find_max())
+    self.assertFalse(x.set_max_stock())
 
 if __name__ == '__main__':
+    """  
+    create Unittest calss object , load TestCSVStock and run suite
+    """
     suite = unittest.TestLoader().loadTestsFromTestCase(TestCSVStock)
     unittest.TextTestRunner(verbosity=2).run(suite)            
-    sys.exit() 
+    sys.exit()
